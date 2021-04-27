@@ -3,6 +3,7 @@ const path = require('path');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
+
 const app = express();
 
 //connecting to db
@@ -22,6 +23,8 @@ app.set('view engine', 'ejs');
 
 //middlewares
 app.use(morgan('dev'));
+app.use(express.json());
+
 
 //routes
 app.use('/', indexRoutes);
