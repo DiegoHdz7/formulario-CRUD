@@ -7,9 +7,15 @@ const mongoose = require('mongoose');
 const app = express();
 
 //connecting to db
-mongoose.connect('mongodb://localhost/crud-mongo')
+/*mongoose.connect('mongodb://localhost/crud-mongo')
                 .then(db =>console.log('db connected'))
-                .catch(err => console.log(err));
+                .catch(err => console.log(err));*/
+mongoose.connect('mongodb://localhost/crud-mongo', {useNewUrlParser: true, useUnifiedTopology: true});
+
+
+
+
+
 
 //importing routes
 const indexRoutes = require('./routes/index');
@@ -23,7 +29,8 @@ app.set('view engine', 'ejs');
 
 //middlewares
 app.use(morgan('dev'));
-app.use(express.json());
+//app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 
 
 //routes
