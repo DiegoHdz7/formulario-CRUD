@@ -1,16 +1,54 @@
+<%- include('partials/header'); %>
 
-   <%- include('partials/header'); %>
-   
-   <form action="/add" method="POST">
-      <label for = "title" >Title</label>
-      <input type="text" name = "title" id = "title">
-
-      <label for = "description" >description</label>
-      <input type="text" name = "description" id = "description">
-      <input type="submit" value="submit" >
-   </form>
-
-    <%- include('partials/footer'); %>
+  
 
 
+
+  <form action="/add" method="POST">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</Title></label>
+      <input type="text" class="form-control" name="title" id="title" placeholder="insert text">
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Password</label>
+      <input type="text" class="form-control" name="description" id="description" placeholder="insert description">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+
+  <table class="table table-dark table-striped" >
+    <thead>
+      <tr >
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
     
+    <tbody>
+      
+        <%tasks.forEach((task, index, array)=>{%>
+          <tr >
+            <td> <%= index + 1%></td>
+            <td> <%= task.title%></td> 
+            <td> <%= task.description%></td> 
+            <td> 
+              <a href="/swap/<%= task._id%>" 
+                class="btn <%= task.status ? 'btn-success' : 'btn-light' %>">done </a>
+              <a href="/delete/<%= task._id%>" class="btn btn-danger">delete</a>
+              <a href="/edit/<%= task._id%>" class="btn btn-warning">edit</a>
+            </td> 
+          </tr>
+          
+        <%})%>
+        
+      
+     
+    </tbody>
+  </table>
+
+  <%- include('partials/footer'); %>
